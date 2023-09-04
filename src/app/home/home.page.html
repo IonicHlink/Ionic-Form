@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Form validations </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container" class="ion-padding">
+    <form action="" [formGroup]="signUpForm" (ngSubmit)="submit()">
+      <ng-container *ngFor="let field of signUpFields">
+        <ion-input  labelPlacement="floating" placeholder="{{field.label}}" formControlName="{{field.name}}" label="{{field.label}}"></ion-input>
+        <span class="error" *ngIf="this.signUpForm.controls?.[field.name]?.errors?.['required'] && isSubmitted">
+          {{field.label}} is required
+        </span>
+        <span class="error" *ngIf="this.signUpForm.controls?.[field.name]?.errors?.['pattern'] && !this.signUpForm.controls?.[field.name]?.valid">
+          {{field.error}}
+        </span>
+      </ng-container>
+      <ion-button expand="block" type="submit">Submit</ion-button>
+    </form>
+  </div>
+</ion-content>
